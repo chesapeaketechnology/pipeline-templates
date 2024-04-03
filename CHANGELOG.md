@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file. This projec
 ## [2.x.x] - on future date... somewhat unreleased but promises to have a new 3.x.x be created for any breaking change
 
 ### Added
+- Added Bash Gitlab pipeline template with linting and secret detection.
 - Added IS_TERRAFORM_MODULE variable so Terraform Gitlab pipeline can run checks, but avoid deploying, Terraform modules.
 - Updated Mega Linter Docker image from 7.5.0 to latest to more easily keep up to date with security updates.
 - Added generic Trufflehog Gitlab job that can be used to search for secrets.

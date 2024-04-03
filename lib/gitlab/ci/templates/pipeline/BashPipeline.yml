@@ -1,0 +1,16 @@
+variables:
+  IMAGE_PREFIX: ""
+
+default:
+  interruptible: true
+
+include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/lint/MegaLinter.yml
+
+stages:
+  - test
+
+mega-linter:
+  variables:
+    ENABLE: BASH

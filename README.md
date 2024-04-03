@@ -365,6 +365,25 @@ include:
 
 ---
 
+### Bash Pipeline
+
+The standard Bash pipeline is the simplest way to get up and running quickly. It provides a full pipeline
+configuration that will lint and apply Bash continuous deployments (CD) from a project. 
+
+#### Linked Jobs
+
+- [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
+- [Mega Linter](#mega-linter-job)
+
+#### Reference URL
+
+```
+include:
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/BashPipeline.yml
+```
+
+---
+
 ### NPM Unit Test and Test Coverage Pipeline
 
 The standard NPM pipeline is the simplest way to get up and running quickly. It provides a full pipeline configuration

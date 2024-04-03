@@ -53,6 +53,14 @@ test_java:
   before_script:
     - !reference [ .configure_gradle_wrapper, script ]
 
+quality_check:
+  before_script:
+    - !reference [ .configure_gradle_wrapper, script ]
+
+dependency_license_scanning:
+  before_script:
+    - !reference [ .configure_gradle_wrapper, script ]
+
 pages_generate:
   before_script:
     - !reference [ .configure_gradle_wrapper, script ]

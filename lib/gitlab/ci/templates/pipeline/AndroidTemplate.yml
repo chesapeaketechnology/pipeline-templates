@@ -13,12 +13,16 @@ variables:
   DEFAULT_IMAGE: "jangrewe/gitlab-ci-android"
   DEPLOY_DEBUG_APK_SLACK_MESSAGE: "Hello Team! Here is the latest debug APK from branch `${CI_COMMIT_REF_NAME}`. It was triggered by: `${CI_PIPELINE_SOURCE}`."
   DEPLOY_DEBUG_APK_PATH: app/build/outputs/apk
+  DEPLOY_DEBUG_AAR_PATH: app/build/outputs/aar
   DEPLOY_DEBUG_APK_NAMES: yourdebugapkname
   DEPLOY_RELEASE_APK_SLACK_MESSAGE: "Hello Team! Here is the latest release APK triggered by tag: `${CI_COMMIT_TAG}`"
   DEPLOY_RELEASE_APK_PATH: app/build/outputs/apk
+  DEPLOY_RELEASE_AAR_PATH: app/build/outputs/aar
   DEPLOY_RELEASE_APK_NAMES: yourreleaseapkname
   APK_SLACK_CHANNEL_ACCESS_TOKEN: ""
   APK_SLACK_CHANNEL_ID: ""
+  ARTIFACTORY_SNAPSHOT_URL: ""
+  ARTIFACTORY_RELEASE_URL: ""
   LINT_CHECK_DISABLED: "false"
   RELEASE:
     value: ""
@@ -32,6 +36,16 @@ variables:
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   - if: ($CI_PIPELINE_SOURCE == "web") && '$RELEASE != "true"'
+
+.snapshot_rules:
+  - if: $CI_COMMIT_TAG
+    when: never # Never build debug builds for tags
+  - if: $RELEASE
+    when: never
+  - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    when: manual
+  - if: $CI_MERGE_REQUEST_ID && $CI_MERGE_REQUEST_IID && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    when: on_success
 
 .release_rules: &release_rules
   - if: $CI_COMMIT_TAG
@@ -47,8 +61,8 @@ before_script:
 
 stages:
   - test
-  - assembleApk
-  - deployApk
+  - assemble
+  - deploy
 
 .testBase:
   stage: test
@@ -117,8 +131,8 @@ testRelease:
 instrumentationTests:
   rules: *debug_rules
 
-assembleApkDebug:
-  stage: assembleApk
+assembleDebug:
+  stage: assemble
   rules: *debug_rules
   script:
     - ./gradlew assembleDebug
@@ -126,9 +140,10 @@ assembleApkDebug:
     expire_in: 1 week
     paths:
       - $DEPLOY_DEBUG_APK_PATH
+      - $DEPLOY_DEBUG_AAR_PATH
 
-assembleApkRelease:
-  stage: assembleApk
+assembleRelease:
+  stage: assemble
   rules: *release_rules
   script:
     - echo ${KEYSTORE_FILE} | base64 -d > my.keystore
@@ -140,9 +155,32 @@ assembleApkRelease:
   artifacts:
     paths:
       - $DEPLOY_RELEASE_APK_PATH
+      - $DEPLOY_RELEASE_AAR_PATH
+
+deployArtifactorySnapshot:
+  stage: deploy
+  rules: *snapshot_rules
+  script:
+    - ./gradlew tasks | grep publish -q
+    - if [ $? -eq 0 ]; then
+        ./gradlew publish -PartifactoryUsername=$CTI_USERNAME -PartifactoryPassword=$CTI_PASSWORD -PartifactoryURL="${ARTIFACTORY_SNAPSHOT_URL}"
+      else
+        echo "No publish command found";
+      fi
+
+deployArtifactoryRelease:
+  stage: deploy
+  rules: *release_rules
+  script:
+    - ./gradlew tasks | grep publish -q
+    - if [ $? -eq 0 ]; then
+        ./gradlew publish -PartifactoryUsername=$CTI_USERNAME -PartifactoryPassword=$CTI_PASSWORD -PartifactoryURL="${ARTIFACTORY_RELEASE_URL}"
+      else
+        echo "No publish command found";
+      fi
 
 deployApkDebug:
-  stage: deployApk
+  stage: deploy
   rules: *debug_rules
   allow_failure: true
   script:
@@ -164,7 +202,7 @@ deployApkDebug:
   cache: {}
 
 deployApkRelease:
-  stage: deployApk
+  stage: deploy
   rules: *release_rules
   script:
     - if [ -z "${APK_SLACK_CHANNEL_ACCESS_TOKEN}" ]; then echo "APK_SLACK_CHANNEL_ACCESS_TOKEN is unset so not pushing message to Slack"; else echo "APK_SLACK_CHANNEL_ACCESS_TOKEN is set to '$APK_SLACK_CHANNEL_ACCESS_TOKEN'"; fi

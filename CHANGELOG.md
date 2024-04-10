@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file. This projec
 - Updated PublishHelmChart.yml to support signing
 - Moved Helm Gitlab job from custom devops image to alpine/helm.
 - Added variable to easily be able to create signed Android apks without having to use git tags.
+- Added job to pubish apk/aars to Artifactory in the Android template
 
 ### Changed
 - Moved spotbugs sast to semgrep because spotbugs end of life for Gitlab for Java.

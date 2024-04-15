@@ -39,15 +39,10 @@ variables:
   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   - if: ($CI_PIPELINE_SOURCE == "web") && '$RELEASE != "true"'
 
-.snapshot_rules:
-  - if: $CI_COMMIT_TAG
-    when: never # Never build debug builds for tags
-  - if: $RELEASE
+.snapshot_rules: &snapshot_rules
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     when: never
-  - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    when: manual
-  - if: $CI_MERGE_REQUEST_ID && $CI_MERGE_REQUEST_IID && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    when: on_success
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 .release_rules: &release_rules
   - if: $CI_COMMIT_TAG
@@ -176,7 +171,7 @@ deployArtifactRelease:
   script:
     - ./gradlew tasks | grep publish -q
     - if [ $? -eq 0 ]; then
-        ./gradlew publish -PartifactUsername=$CTI_USERNAME -PartifactPassword=$CTI_PASSWORD -PartifactURL="${ARTIFACT_RELEASE_URL}"
+        ./gradlew publish -PartifactUsername=$ARTIFACT_REPO_USERNAME -PartifactPassword=$ARTIFACT_REPO_PASSWORD -PartifactURL="${ARTIFACT_RELEASE_URL}"
       else
         echo "No publish command found";
       fi

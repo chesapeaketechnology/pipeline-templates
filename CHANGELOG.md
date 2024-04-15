@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.x.x] - on future date... somewhat unreleased but promises to have a new 4.x.x be created for any breaking change
+### Added
+- Added job to pubish apk/aars to Artifactory in the Android template
+### Changed
+### Fixed
+
 ## [2.x.x] - on future date... somewhat unreleased but promises to have a new 3.x.x be created for any breaking change
 
 ### Added
@@ -19,14 +25,13 @@ All notable changes to this project will be documented in this file. This projec
 - Updated PublishHelmChart.yml to support signing
 - Moved Helm Gitlab job from custom devops image to alpine/helm.
 - Added variable to easily be able to create signed Android apks without having to use git tags.
-- Added job to pubish apk/aars to Artifactory in the Android template
 
 ### Changed
 - Moved spotbugs sast to semgrep because spotbugs end of life for Gitlab for Java.
 - Changed variable DEPLOY_DEBUG_APK_NAME to DEPLOY_DEBUG_APK_NAMES to now support multiple Android flavors.
 
 ### Fixed
-- Automatically set Gradle Gitlab license and quality job's gradlew permissions. 
+- Automatically set Gradle Gitlab license and quality job's gradlew permissions.
 - Updated Terraform pipeline's default Docker image from light to latest tag since light is deprecated.
 - Fixed trivy sbom Gitlab job not working in merge request by changing rules so kaniko publish runs with trivy sbom and
   container scan jobs run, adding checks to not overwrite docker image in repo, adding publish of latest on main branch

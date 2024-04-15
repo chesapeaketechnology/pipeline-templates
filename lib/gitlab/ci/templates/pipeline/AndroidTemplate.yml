@@ -21,8 +21,8 @@ variables:
   DEPLOY_RELEASE_APK_NAMES: yourreleaseapkname
   APK_SLACK_CHANNEL_ACCESS_TOKEN: ""
   APK_SLACK_CHANNEL_ID: ""
-  ARTIFACTORY_SNAPSHOT_URL: ""
-  ARTIFACTORY_RELEASE_URL: ""
+  ARTIFACT_SNAPSHOT_URL: ""
+  ARTIFACT_RELEASE_URL: ""
   LINT_CHECK_DISABLED: "false"
   RELEASE:
     value: ""
@@ -157,24 +157,24 @@ assembleRelease:
       - $DEPLOY_RELEASE_APK_PATH
       - $DEPLOY_RELEASE_AAR_PATH
 
-deployArtifactorySnapshot:
+deployArtifactSnapshot:
   stage: deploy
   rules: *snapshot_rules
   script:
     - ./gradlew tasks | grep publish -q
     - if [ $? -eq 0 ]; then
-        ./gradlew publish -PartifactoryUsername=$CTI_USERNAME -PartifactoryPassword=$CTI_PASSWORD -PartifactoryURL="${ARTIFACTORY_SNAPSHOT_URL}"
+        ./gradlew publish -PartifactUsername=$CTI_USERNAME -PartifactPassword=$CTI_PASSWORD -PartifactURL="${ARTIFACT_SNAPSHOT_URL}"
       else
         echo "No publish command found";
       fi
 
-deployArtifactoryRelease:
+deployArtifactRelease:
   stage: deploy
   rules: *release_rules
   script:
     - ./gradlew tasks | grep publish -q
     - if [ $? -eq 0 ]; then
-        ./gradlew publish -PartifactoryUsername=$CTI_USERNAME -PartifactoryPassword=$CTI_PASSWORD -PartifactoryURL="${ARTIFACTORY_RELEASE_URL}"
+        ./gradlew publish -PartifactUsername=$CTI_USERNAME -PartifactPassword=$CTI_PASSWORD -PartifactURL="${ARTIFACT_RELEASE_URL}"
       else
         echo "No publish command found";
       fi

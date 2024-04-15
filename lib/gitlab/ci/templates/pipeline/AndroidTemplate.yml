@@ -23,6 +23,8 @@ variables:
   APK_SLACK_CHANNEL_ID: ""
   ARTIFACT_SNAPSHOT_URL: ""
   ARTIFACT_RELEASE_URL: ""
+  ARTIFACT_REPO_PASSWORD: ""
+  ARTIFACT_REPO_USERNAME: ""
   LINT_CHECK_DISABLED: "false"
   RELEASE:
     value: ""
@@ -163,7 +165,7 @@ deployArtifactSnapshot:
   script:
     - ./gradlew tasks | grep publish -q
     - if [ $? -eq 0 ]; then
-        ./gradlew publish -PartifactUsername=$CTI_USERNAME -PartifactPassword=$CTI_PASSWORD -PartifactURL="${ARTIFACT_SNAPSHOT_URL}"
+        ./gradlew publish -PartifactUsername=$ARTIFACT_REPO_USERNAME -PartifactPassword=$ARTIFACT_REPO_PASSWORD -PartifactURL="${ARTIFACT_SNAPSHOT_URL}"
       else
         echo "No publish command found";
       fi

@@ -158,7 +158,8 @@ deployArtifactSnapshot:
   stage: deploy
   rules: *snapshot_rules
   script:
-    - if ./gradlew tasks | grep publish -q; then
+    - |
+      if ./gradlew tasks | grep publish -q; then
         ./gradlew publish -PartifactUsername=$ARTIFACT_REPO_USERNAME -PartifactPassword=$ARTIFACT_REPO_PASSWORD -PartifactURL="${ARTIFACT_SNAPSHOT_URL}"
       else
         echo "No publish command found"
@@ -168,7 +169,8 @@ deployArtifactRelease:
   stage: deploy
   rules: *release_rules
   script:
-    - if ./gradlew tasks | grep publish -q; then
+    - |
+      if ./gradlew tasks | grep publish -q; then
         ./gradlew publish -PartifactUsername=$ARTIFACT_REPO_USERNAME -PartifactPassword=$ARTIFACT_REPO_PASSWORD -PartifactURL="${ARTIFACT_RELEASE_URL}"
       else
         echo "No publish command found"

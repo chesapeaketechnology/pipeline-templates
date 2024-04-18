@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file. This projec
 ## [3.x.x] - on future date... somewhat unreleased but promises to have a new 4.x.x be created for any breaking change
 ### Added
 - Added job to publish apk/aars to Artifactory in the Android template
+  
 ### Changed
+- Breaking change of changing Android template's pipeline stages from assembleApk and deployApk to assemble and deploy since now handling apks and aars.
+  
 ### Fixed
 
 ## [2.x.x] - 2024-04-16

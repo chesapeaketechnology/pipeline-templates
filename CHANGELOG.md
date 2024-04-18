@@ -4,11 +4,11 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [3.x.x] - on future date... somewhat unreleased but promises to have a new 4.x.x be created for any breaking change
 ### Added
-- Added job to pubish apk/aars to Artifactory in the Android template
+- Added job to publish apk/aars to Artifactory in the Android template
 ### Changed
 ### Fixed
 
-## [2.x.x] - on future date... somewhat unreleased but promises to have a new 3.x.x be created for any breaking change
+## [2.x.x] - 2024-04-16
 
 ### Added
 - Added Bash Gitlab pipeline template with linting and secret detection.

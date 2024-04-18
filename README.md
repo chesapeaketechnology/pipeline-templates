@@ -74,7 +74,7 @@ branch match the below DEV_OR_RELEASE_REGEX variable.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/GradleJavaPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/GradleJavaPipeline.yml
 ```
 
 ---
@@ -124,7 +124,7 @@ they are posted to a Slack channel.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/AndroidTemplate.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/AndroidTemplate.yml
 ```
 
 ---
@@ -162,7 +162,7 @@ merged into the "default" branch.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/AndroidTemplateExt.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/AndroidTemplateExt.yml
 ```
 
 ---
@@ -197,7 +197,7 @@ DEV_OR_RELEASE_REGEX variable.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/GradleInstall4JPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/GradleInstall4JPipeline.yml
 ```
 
 ---
@@ -227,7 +227,7 @@ GitLab web UI on the default branch of the repo and only if the `RELEASE` variab
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/GradlePluginReleasePipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/GradlePluginReleasePipeline.yml
 ```
 
 ---
@@ -241,7 +241,7 @@ configuration that will format, validate, and deploy Packer VMs from a project.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/PackerPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/PackerPipeline.yml
 ```
 
 ---
@@ -277,7 +277,7 @@ from a project. Can be used for any cloud environment (e.g., Azure, AWS, etc).
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/TerraformPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/TerraformPipeline.yml
 ```
 
 ---
@@ -316,7 +316,7 @@ configuration that will lint and apply Docker continuous deployments (CD) from a
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/DockerPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/DockerPipeline.yml
 ```
 
 ---
@@ -343,7 +343,7 @@ that will lint and apply Helm continuous deployments (CD) from a project.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/HelmPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/HelmPipeline.yml
 ```
 
 ---
@@ -366,7 +366,7 @@ machine host (e.g., Azure VMs, AWS VMs, local VMs, etc).
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/AnsiblePipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/AnsiblePipeline.yml
 ```
 
 ---
@@ -385,7 +385,7 @@ configuration that will lint and apply Bash continuous deployments (CD) from a p
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/BashPipeline.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/BashPipeline.yml
 ```
 
 ---
@@ -435,7 +435,7 @@ module.exports = {
 
 ```
 include:
-    - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/NpmJestCoveragePipeline.yml
+    - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/NpmJestCoveragePipeline.yml
 
 ```
 
@@ -466,7 +466,7 @@ requirements from that pipeline in order to use this one.
 
 ```
 include:
-    - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/pipeline/WebtakTestCoverage.yml
+    - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/WebtakTestCoverage.yml
 
 ```
 
@@ -481,7 +481,7 @@ permissions.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/references/gradle/GradleWrapperSetup.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/references/gradle/GradleWrapperSetup.yml
 ```
 
 ---
@@ -506,7 +506,7 @@ job.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/Test.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/Test.yml
 ```
 
 ---
@@ -535,7 +535,7 @@ the repo. Javadocs are also published with releases.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/PublishJar.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/PublishJar.yml
 ```
 
 ---
@@ -555,7 +555,7 @@ Publishes Gitlab Pages such as JavaDocs, coverage, quality, licenses, and vulner
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/PublishPages.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/PublishPages.yml
 ```
 
 ---
@@ -568,7 +568,7 @@ Gradle job to detect secrets and put into a report.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/SecretDetection.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/SecretDetection.yml
 ```
 
 ---
@@ -587,7 +587,7 @@ Gradle job to scan quality and put into a report.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/QualityReporting.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/QualityReporting.yml
 ```
 
 ---
@@ -607,7 +607,7 @@ Jobs to scan dependency vulnerabilities of Gradle projects and put into a report
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/DependencyScanning.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/DependencyScanning.yml
 ```
 
 ---
@@ -627,7 +627,7 @@ Static Application Security Testing (SAST) scanning and reports for a Gradle pro
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/StaticApplicationSecurityTesting.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/StaticApplicationSecurityTesting.yml
 ```
 
 ---
@@ -646,7 +646,7 @@ Jobs to scan licenses of Gradle projects and put into a report.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/LicenseScanning.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/LicenseScanning.yml
 ```
 
 ---
@@ -666,7 +666,7 @@ the [AsciiDoc Generator Gradle Plugin](https://plugins.gradle.org/plugin/gov.rap
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/Asciidoc.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/Asciidoc.yml
 ```
 
 ---
@@ -690,7 +690,7 @@ Runs Android Instrumentation Tests against an Android device/emulator using a Gr
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/Asciidoc.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/Asciidoc.yml
 ```
 
 ---
@@ -715,7 +715,7 @@ images.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/docker/Kaniko.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/docker/Kaniko.yml
 ```
 
 ---
@@ -747,7 +747,7 @@ is not set or the credentials are not present on your system, use the username a
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/docker/Jib.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/docker/Jib.yml
 ```
 
 ---
@@ -771,7 +771,7 @@ is used in place of the standard Docker toolchain to circumvent security restric
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/docker/Img.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/docker/Img.yml
 ```
 
 ---
@@ -798,7 +798,7 @@ Deploys an Ansible Playbook.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/ansible/PlaybookDeploy.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/ansible/PlaybookDeploy.yml
 ```
 
 ### Checkov IaC SAST (job)
@@ -816,7 +816,7 @@ Security Testing (SAST) report.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/security/CheckovIacSast.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/CheckovIacSast.yml
 ```
 
 ---
@@ -842,7 +842,7 @@ Uses the [Trivy](https://github.com/aquasecurity/trivy) to create a SBOM report.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/security/Trivy.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/Trivy.yml
 ```
 
 ---
@@ -864,7 +864,7 @@ Uses Fortify to performance a security scan.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/security/FortifyScanning.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/FortifyScanning.yml
 ```
 
 ---
@@ -883,7 +883,7 @@ Runs SonarQube gradle tasks to analyze a repo and publish generated reports to a
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/gradle/SonarQube.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/SonarQube.yml
 ```
 
 ---
@@ -903,7 +903,7 @@ Uses the [Mega Linter toolchain](https://github.com/oxsecurity/megalinter) to li
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/lint/MegaLinter.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/lint/MegaLinter.yml
 ```
 
 ---
@@ -931,7 +931,7 @@ registry
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/helm/PublishHelmChart.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/helm/PublishHelmChart.yml
 ```
 
 ### Trufflehog Secret Detection (job)
@@ -946,7 +946,7 @@ Runs Trufflehog to detect secrets in a Gitlab repository.
 
 ```
 include:
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/2.x.x/lib/gitlab/ci/templates/jobs/security/TrufflehogSecretDetection.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/TrufflehogSecretDetection.yml
 ```
 
 ## Change log

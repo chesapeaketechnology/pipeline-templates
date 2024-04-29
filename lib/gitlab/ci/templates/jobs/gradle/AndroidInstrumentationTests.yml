@@ -29,9 +29,8 @@
     when: always
     expire_in: 1 days
     reports:
-      junit: [
-        ./**/build/outputs/androidTest-results/connected/TEST-*.xml,
-      ]
+      junit:
+        - "**/TEST-*.xml"
     paths:
       - "**/build/outputs/androidTest-results"
       - "**/build/reports/androidTests"

@@ -7,11 +7,12 @@ All notable changes to this project will be documented in this file. This projec
 - Updated junit report path to be more generic in Android Instrumentation Test Job
 - Added job to publish apk/aars to Artifactory in the Android template
 
-  
+
 ### Changed
 - Breaking change of changing Android template's pipeline stages from assembleApk and deployApk to assemble and deploy since now handling apks and aars.
-  
+
 ### Fixed
+- Harbor robot accounts with $ in usernames to work for Helm push.
 
 ## [2.x.x] - 2024-04-16
 

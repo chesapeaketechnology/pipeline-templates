@@ -89,6 +89,7 @@ they are posted to a Slack channel.
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Gradle Wrapper Configuration](#gradle-wrapper-configuration-job)
 - [Android Instrumentation Tests](#android-instrumentation-tests-job)
+- [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 
 #### Customization
 
@@ -139,6 +140,7 @@ merged into the "default" branch.
 
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Gradle Wrapper Configuration](#gradle-wrapper-configuration-job)
+- [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 
 #### Customization
 
@@ -332,6 +334,7 @@ that will lint and apply Helm continuous deployments (CD) from a project.
 - [Mega Linter](#mega-linter-job)
 - [Publish Helm Chart Jobs](#publish-helm-chart-jobs)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
+- [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 
 #### Customization
 

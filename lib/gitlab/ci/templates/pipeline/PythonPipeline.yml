@@ -1,0 +1,69 @@
+variables:
+  PYTHON_PIPELINE_IMAGE_PREFIX: ""
+  PYTHON_PIPELINE_DEFAULT_IMAGE: python:3.10
+
+default:
+  interruptible: true
+
+include:
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
+
+stages:
+  - test
+
+lint:
+  image:  ${PYTHON_PIPELINE_IMAGE_PREFIX}$PYTHON_PIPELINE_DEFAULT_IMAGE
+  variables:
+    PYTHON_ROOT: .
+  script:
+    - pip install flake8
+    - flake8 $PYTHON_ROOT
+  allow_failure: true  # Allow this job to fail
+
+format_check:
+  image: ${PYTHON_PIPELINE_IMAGE_PREFIX}$PYTHON_PIPELINE_DEFAULT_IMAGE
+  variables:
+    PYTHON_ROOT: .
+  script:
+    - pip install black
+    - black --check $PYTHON_ROOT
+  allow_failure: true  # Allow this job to fail
+
+documentation_check:
+  image: ${PYTHON_PIPELINE_IMAGE_PREFIX}$PYTHON_PIPELINE_DEFAULT_IMAGE
+  variables:
+    PYTHON_ROOT: .
+  script:
+    - pip install interrogate
+    - interrogate $PYTHON_ROOT -vv
+  allow_failure: true  # Allow this job to fail
+
+pytest:
+  variables:
+    MICROMAMBA_ENVIRONMENT_FILE: environment.yml
+    MICROMAMBA_VERSION: 1.4.9-lunar
+    PYTHON_ROOT: ""
+    PYTHON_MODULE: ""
+    PYTEST_MODULE: ""
+  image: ${PYTHON_PIPELINE_IMAGE_PREFIX}mambaorg/micromamba:${MICROMAMBA_VERSION}
+  coverage: '/TOTAL.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+  before_script:
+    - source /usr/local/bin/_activate_current_env.sh
+    - micromamba activate base
+  script:
+    - cd ${PYTHON_ROOT}
+    - micromamba install --strict-channel-priority -y -f ${MICROMAMBA_ENVIRONMENT_FILE}
+    - pip install pytest-cov
+    # Transform the python module(s) with the --cov to handle potentially multiple python modules
+    - python_module_with_cov_flag=$(echo $PYTHON_MODULE | awk '{for(i=1;i<=NF;i++) printf "--cov=%s ", $i}')
+    # Trim trailing space
+    - python_module_with_cov_flag=$(echo $python_module_with_cov_flag | sed 's/ $//')
+    - python -m pytest $python_module_with_cov_flag --cov-report term --cov-report xml:coverage.xml --junit-xml=pytest_results.xml --disable-warnings ${PYTEST_MODULE}
+  artifacts:
+    when: always
+    reports:
+      junit: ${PYTHON_ROOT}/pytest_results.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml

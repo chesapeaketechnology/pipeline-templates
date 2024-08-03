@@ -95,8 +95,8 @@ they are posted to a Slack channel.
 
 | Variable                           | Pre-Loaded** | Default Value                                                        	                                                                                          | Description                                                                                                                                            	 |
 |------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| DEFAULT_IMAGE           	         | &check;      | jangrewe/gitlab-ci-android                                                                                                                                      | The base docker image used to run all included jobs. Jobs can also be further customized by specifying a different image for a specific job.           	 |
-| IMAGE_PREFIX                 	     |              | 	                                                                                                                                                               | Adds a prefix to the Docker images used to run the Gitlab jobs. Useful for when using non Dockerhub repositories.	                                     |
+| DEFAULT_IMAGE           	          | &check;      | jangrewe/gitlab-ci-android                                                                                                                                      | The base docker image used to run all included jobs. Jobs can also be further customized by specifying a different image for a specific job.           	 |
+| IMAGE_PREFIX                 	     |              | 	                                                                                                                                                               | Adds a prefix to the Docker images used to run the Gitlab jobs. Useful for when using non Dockerhub repositories.	                                       |
 | APK_SLACK_CHANNEL_ACCESS_TOKEN     | &check;      |                                                                                                                                                                 | The Slack channel access token.                                                                                                                          |
 | APK_SLACK_CHANNEL_ID               | &check;      |                                                                                                                                                                 | The Slack channel access ID.                                                                                                                             |
 | ARTIFACT_RELEASE_URL               | &check;      |                                                                                                                                                                 | The Artifact URL to publish release apk/aars.                                                                                                            |
@@ -260,7 +260,6 @@ from a project. Can be used for any cloud environment (e.g., Azure, AWS, etc).
 - [Gitlab SAST IaC](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
 
-
 #### Customization
 
 | Variable            | Description                                                	                                                                                                                               |
@@ -383,6 +382,37 @@ configuration that will lint and apply Bash continuous deployments (CD) from a p
 
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Mega Linter](#mega-linter-job)
+
+#### Reference URL
+
+```
+include:
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/pipeline/BashPipeline.yml
+```
+
+---
+
+### Python Pipeline
+
+The standard Python pipeline is the simplest way to get up and running quickly. It provides a full pipeline
+configuration that will lint and apply Python continuous deployments (CD) from a project.
+
+#### Linked Jobs
+
+- [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
+- [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
+
+#### Customization
+
+| Variable                        | Description                                                	                                                                                 |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| PYTHON_PIPELINE_IMAGE_PREFIX    | Used to add an image prefix at the beginning of an image used by a Gitlab pipeline job.                                                      |
+| PYTHON_PIPELINE_DEFAULT_IMAGE 	 | The base docker image used to run all included jobs. Jobs can also be further customized by specifying a different image for a specific job. |
+| PYTHON_ROOT                     | The directory that is the root of the Python component used by a Gitlab pipeline job.                                                        |
+| PYTHON_MODULE                   | The python module(s) that should be invoked by the pytest Gitlab job, relative to PYTHON_ROOT, can be multiple modules.                      |
+| PYTEST_MODULE                   | The test module(s) that should be invoked by the pytest Gitlab job, relative to PYTHON_ROOT, can be multiple modules.                        |
+| MICROMAMBA_VERSION              | The docker image base for micromamba that should be used by the pytest Gitlab job.                                                           |
+| MICROMAMBA_ENVIRONMENT_FILE     | The environment definition file that should be used by the pytest Gitlab job.                                                                |
 
 #### Reference URL
 

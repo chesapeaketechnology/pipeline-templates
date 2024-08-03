@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## [3.x.x] - on future date... somewhat unreleased but promises to have a new 4.x.x be created for any breaking change
 ### Added
+- A Python pipeline with unit tests, unit test coverage, linting, formatting, and documentation checking
 - Gitlab SAST job to Helm and Android pipelines
 - Updated junit report path to be more generic in Android Instrumentation Test Job
 - Added job to publish apk/aars to Artifactory in the Android template

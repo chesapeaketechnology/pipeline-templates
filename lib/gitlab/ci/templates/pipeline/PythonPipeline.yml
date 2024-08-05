@@ -17,8 +17,8 @@ lint:
   variables:
     PYTHON_ROOT: .
   script:
-    - pip install flake8
-    - flake8 $PYTHON_ROOT
+    - pip install ruff
+    - ruff check $PYTHON_ROOT
   allow_failure: true  # Allow this job to fail
 
 format_check:

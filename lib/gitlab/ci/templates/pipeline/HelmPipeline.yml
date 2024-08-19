@@ -18,3 +18,19 @@ stages:
 mega-linter:
   variables:
     ENABLE: ANSIBLE
+
+# Save report from secret_detection job
+secret_detection:
+  artifacts:
+    reports:
+      secret_detection: gl-secret-detection-report.json
+    paths:
+      - gl-secret-detection-report.json
+
+# Save report from semgrep-sast scan job
+semgrep-sast:
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - gl-sast-report.json

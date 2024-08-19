@@ -82,3 +82,19 @@ code-quality-html:
     REPORT_FORMAT: html
   artifacts:
     paths: [gl-code-quality-report.html]
+
+# Save report from secret_detection job
+secret_detection:
+  artifacts:
+    reports:
+      secret_detection: gl-secret-detection-report.json
+    paths:
+      - gl-secret-detection-report.json
+
+# Save report from semgrep-sast scan job
+semgrep-sast:
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - gl-sast-report.json

@@ -64,3 +64,11 @@ doRelease:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == 'web' && $RELEASE == 'true'
   script:
     - ./gradlew -Prelease doRelease
+
+# Save report from secret_detection job
+secret_detection:
+  artifacts:
+    reports:
+      secret_detection: gl-secret-detection-report.json
+    paths:
+      - gl-secret-detection-report.json

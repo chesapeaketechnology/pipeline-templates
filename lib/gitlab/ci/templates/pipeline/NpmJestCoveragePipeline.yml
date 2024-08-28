@@ -82,3 +82,35 @@ code-quality-html:
     REPORT_FORMAT: html
   artifacts:
     paths: [gl-code-quality-report.html]
+
+# Override default rules and artifacts at
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml
+secret_detection:
+  rules:
+    - if: $SECRET_DETECTION_DISABLED == 'true' || $SECRET_DETECTION_DISABLED == '1'
+      when: never
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_MERGE_REQUEST_IID
+  artifacts:
+    reports:
+      secret_detection: gl-secret-detection-report.json
+    paths:
+      - gl-secret-detection-report.json
+
+# Override default rules and artifacts at
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml.
+semgrep-sast:
+  # Makes some assumptions like "exists" for language files types like ".py" not needed because we are explicitly deciding to turn on semgrep-sast for a given language Gitlab pipeline.
+  # Also Gitlab Advanced SAST checks not done since that is a Gitlab Ultimate feature we're going to ignore since not many/any users using Gitlab Ultimate.
+  rules:
+    - if: $SAST_DISABLED == 'true' || $SAST_DISABLED == '1'
+      when: never
+    - if: $SAST_EXCLUDED_ANALYZERS =~ /semgrep/
+      when: never
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_MERGE_REQUEST_IID
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+    paths:
+      - gl-sast-report.json

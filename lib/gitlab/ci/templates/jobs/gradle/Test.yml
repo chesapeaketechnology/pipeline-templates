@@ -14,6 +14,7 @@ test_java:
     paths:
       - $JACOCO_OUTPUT_DIR
       - ./build/reports/jacoco/
+      - "**/build/reports/tests"
     reports:
       junit:
         - "**/TEST-*.xml"

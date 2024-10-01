@@ -11,7 +11,8 @@ kaniko_publish:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ "" ]
   script:
-    - if [ -z "${DOCKER_BUILD_ARGS}" ]; then
+    - |
+      if [ -z "${DOCKER_BUILD_ARGS}" ]; then
         echo "DOCKER_BUILD_ARGS is either not set or empty"
         docker_build_args_flag=""
       else
@@ -19,7 +20,7 @@ kaniko_publish:
         for docker_build_arg in $DOCKER_BUILD_ARGS
           do
             echo "adding build arg of $docker_build_arg"
-            docker_build_args_flag+="--build-arg $docker_build_arg"
+            docker_build_args_flag+=" --build-arg $docker_build_arg"
         done
       fi
     - echo "Created kaniko build arguments $docker_build_args_flag"

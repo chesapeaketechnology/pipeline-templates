@@ -3,6 +3,7 @@ variables:
   DOCKER_DIRECTORY: $CI_PROJECT_DIR
   DOCKERFILE: Dockerfile
   OVERWRITABLE_TAG_REGEX: \-rc\.[0-9]$
+  DOCKER_BUILD_ARGS: ""
 
 kaniko_publish:
   stage: publish
@@ -10,6 +11,18 @@ kaniko_publish:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ "" ]
   script:
+    - if [ -z "${DOCKER_BUILD_ARGS}" ]; then
+        echo "DOCKER_BUILD_ARGS is either not set or empty"
+        docker_build_args_flag=""
+      else
+        echo "DOCKER_BUILD_ARGS is set and not empty"
+        for docker_build_arg in $DOCKER_BUILD_ARGS
+          do
+            echo "adding build arg of $docker_build_arg"
+            docker_build_args_flag+="--build-arg $docker_build_arg"
+        done
+      fi
+    - echo "Created kaniko build arguments $docker_build_args_flag"
     - if [[ $DOCKER_DIRECTORY ]]; then cd $DOCKER_DIRECTORY; fi;
     - mkdir -p /kaniko/.docker
     - if [ -f "${REGISTRY_CRT}" ]; then cat "${REGISTRY_CRT}" >> /kaniko/ssl/certs/ca-certificates.crt; fi # supports self-signed registry
@@ -18,7 +31,7 @@ kaniko_publish:
     - |
       if [ "$CI_COMMIT_REF_NAME" == "$CI_DEFAULT_BRANCH" ]; then
           echo "pushing a latest tagged docker image since on default branch"
-          /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $DOCKERFILE --destination $DOCKER_REPO_HOSTNAME/$DOCKER_REPO_NAME/$APP_NAME:latest
+          /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $DOCKERFILE --destination $DOCKER_REPO_HOSTNAME/$DOCKER_REPO_NAME/$APP_NAME:latest $docker_build_args_flag
       fi
 
     - |
@@ -28,12 +41,12 @@ kaniko_publish:
           touch $dockerfile_to_test_if_image_tag_exists
           echo FROM $DOCKER_REPO_HOSTNAME/$DOCKER_REPO_NAME/$APP_NAME:$VERSION > $dockerfile_to_test_if_image_tag_exists
           echo "checking if image exists already, will exit and fail Gitlab job if the image already exists"
-          /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $dockerfile_to_test_if_image_tag_exists --no-push > /dev/null && exit 1 || true
+          /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $dockerfile_to_test_if_image_tag_exists $docker_build_args_flag --no-push > /dev/null && exit 1 || true
           echo "image doesn't exist, continuing on"
       fi
 
     - echo "Pushing docker image with version $VERSION"
-    - /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $DOCKERFILE --destination $DOCKER_REPO_HOSTNAME/$DOCKER_REPO_NAME/$APP_NAME:$VERSION
+    - /kaniko/executor --context $DOCKER_DIRECTORY --dockerfile $DOCKERFILE --destination $DOCKER_REPO_HOSTNAME/$DOCKER_REPO_NAME/$APP_NAME:$VERSION $docker_build_args_flag
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "web"

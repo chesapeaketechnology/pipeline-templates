@@ -745,6 +745,7 @@ images.
 | DOCKER_REPO_USERNAME     | Only needed if not using DOCKER_AUTH_CONFIG. Username for that repository                                                                                              |
 | DOCKER_REPO_PASSWORD     | Only needed if not using DOCKER_AUTH_CONFIG. Password for that repository                                                                                              |
 | OVERWRITABLE_TAG_REGEX   | Regex of Docker image tags to not overwrite in a Docker repository                                                                                                     |
+| DOCKER_BUILD_ARGS        | Docker build arguments spaced delimited                                                                                                                                |
 
 ```
 include:

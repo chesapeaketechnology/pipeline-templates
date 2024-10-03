@@ -39,6 +39,13 @@ before_script:
 .base-installer:
   stage: build
   script:
+    - | # Don't write ejt.ks since supporting backwards compatibility for ejt license servers not using encrpytion key
+      if [ -n "$EJT_LICENSE_ENCRYPTION_KEY_BASE64" ]; then
+        echo "$EJT_LICENSE_ENCRYPTION_KEY_BASE64" | base64 --decode > ejt.ks
+        echo "Variable written to ejt.ks, can be used for encrypted connection to EJT license server"
+      else
+        echo "EJT_LICENSE_ENCRYPTION_KEY_BASE64 is empty; nothing written to the ejt.ks file."
+      fi
     # Only publish when building develop or a release branch
     - if [[ $CI_COMMIT_BRANCH =~ $DEV_OR_RELEASE_REGEX ]]; then PUBLISH="publish"; else PUBLISH="-x publish"; fi
     - echo "Build with SNAPSHOT_FLAGS='$SNAPSHOT_FLAGS' JDK_SELECTOR='$JDK_SELECTOR' PUBLISH='$PUBLISH' using flags '$GRADLE_FLAGS'"

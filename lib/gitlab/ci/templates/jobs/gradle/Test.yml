@@ -33,7 +33,7 @@ test_java:
     - if: $CI_PIPELINE_SOURCE == "web"
 
 combine_test_reports:
-  stage: report_processing
+  stage: test
   needs: [test_java]
   script:
     - echo "Combining test reports using JaCoCo"

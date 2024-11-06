@@ -1,5 +1,5 @@
 variables:
-  PROJECT_DIR: ./sensorsurvey
+  PROJECT_DIR: ./
   JACOCO_OUTPUT_DIR: $PROJECT_DIR/build/reports/jacoco
   JACOCO_HTML_LOCATION: $JACOCO_OUTPUT_DIR/index.html
   JACOCO_XML_LOCATION:
@@ -34,7 +34,7 @@ test_java:
 
 combine_test_reports:
   stage: report_processing
-  needs: [test_java, instrumentationTests]
+  needs: [test_java]
   script:
     - echo "Combining test reports using JaCoCo"
     - ./gradlew jacocoCombineTestReports -PoutputDir=reports/jacoco

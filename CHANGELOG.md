@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file. This projec
 - Gitlab SAST job to Helm and Android pipelines
 - Updated junit report path to be more generic in Android Instrumentation Test Job
 - Added job to publish apk/aars to Artifactory in the Android template
+- Added job to combine unit and instrumented tests to the Android GitLab template.
+- Added job to visualize the combined unit and instrumented tests code coverage.
 
 
 ### Changed

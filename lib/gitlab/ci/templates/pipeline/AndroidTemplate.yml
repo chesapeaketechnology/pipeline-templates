@@ -1,7 +1,6 @@
 include:
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/references/gradle/GradleWrapperSetup.yml
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/refs/heads/feature/android_tests_code_coverage/lib/gitlab/ci/templates/jobs/gradle/AndroidInstrumentationTests.yml
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/refs/heads/feature/android_tests_code_coverage/lib/gitlab/ci/templates/jobs/gradle/Test.yml
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
 
@@ -28,6 +27,11 @@ variables:
   ARTIFACT_REPO_PASSWORD: ""
   ARTIFACT_REPO_USERNAME: ""
   LINT_CHECK_DISABLED: "false"
+  PROJECT_DIR: ./
+  JACOCO_OUTPUT_DIR: $PROJECT_DIR/build/reports/jacoco
+  JACOCO_HTML_LOCATION: $JACOCO_OUTPUT_DIR/index.html
+  JACOCO_XML_LOCATION: $JACOCO_OUTPUT_DIR/jacoco-report.xml
+  COMBINE_TEST_COVERAGE_DISABLED: "true"
   RELEASE:
     value: ""
     description: Determines what type of apk should be produced. Leave blank to produce a debug apk or anything, like 'true', to create a release apk.
@@ -260,3 +264,63 @@ workflow:
     - if: $CI_COMMIT_TAG # if this is a release
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH # if this is a push to develop
     - if: $CI_PIPELINE_SOURCE == "web" # if triggered from the Gitlab UI
+
+combineCoverageReports:
+  stage: report_processing
+  needs: [testDebug, instrumentationTests]
+  script:
+    - echo "Combining test reports using JaCoCo"
+    - ./gradlew $BUILD_TARGET -PoutputDir=reports/jacoco
+    - cat $JACOCO_HTML_LOCATION | grep -o 'Total[^%]*%'
+  artifacts:
+    when: always
+    paths:
+      - $JACOCO_HTML_LOCATION
+      - $JACOCO_XML_LOCATION
+    expire_in: 1 days
+  rules:
+    - if: '$COMBINE_TEST_COVERAGE_DISABLED =~ /true/i'
+      when: never
+    - if: '$VISUALIZE_TEST_COVERAGE_DISABLED =~ /true/i'
+      when: never
+    # Don't rebuild when tags are committed
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "web"
+  allow_failure: true
+
+visualizeCombinedTestCoverage:
+  stage: report_processing
+  needs: [ "combineCoverageReports" ]
+  image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
+  script:
+    - echo $JACOCO_HTML_LOCATION
+    - echo $JACOCO_XML_LOCATION
+    - test -e $JACOCO_XML_LOCATION || { echo "JaCoCo XML report not found!"; exit 1; }
+    - test -e $JACOCO_HTML_LOCATION || { echo "JaCoCo HTML report not found!"; exit 1; }
+    - mkdir -p build/reports/jacoco
+    - python /opt/cover2cover.py $JACOCO_XML_LOCATION $PROJECT_DIR/src/main/java > $PROJECT_DIR/build/reports/jacoco/cobertura.xml
+    - python /opt/source2filename.py $PROJECT_DIR/build/reports/jacoco/cobertura.xml
+    - cat $JACOCO_HTML_LOCATION | grep -o 'Total[^%]*%'
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: "**/cobertura.xml"
+  rules:
+    - if: '$COMBINE_TEST_COVERAGE_DISABLED =~ /true/i'
+    - when: never
+    - if: '$TEST_JAVA_DISABLED =~ /true/i'
+      when: never
+    - if: '$VISUALIZE_TEST_COVERAGE_DISABLED =~ /true/i'
+      when: never
+    # Don't rebuild when tags are committed
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "web"
+  allow_failure: true

@@ -270,7 +270,7 @@ combineCoverageReports:
   needs: [testDebug, instrumentationTests]
   script:
     - echo "Combining test reports using JaCoCo"
-    - ./gradlew $BUILD_TARGET -PoutputDir=reports/jacoco
+    - ./gradlew $BUILD_TARGET
     - cat $JACOCO_HTML_LOCATION | grep -o 'Total[^%]*%'
   artifacts:
     when: always

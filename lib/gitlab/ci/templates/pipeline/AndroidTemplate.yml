@@ -312,8 +312,6 @@ visualizeCombinedTestCoverage:
         path: "**/cobertura.xml"
   rules:
     - if: '$COMBINE_TEST_COVERAGE_DISABLED =~ /true/i'
-    - when: never
-    - if: '$TEST_JAVA_DISABLED =~ /true/i'
       when: never
     - if: '$VISUALIZE_TEST_COVERAGE_DISABLED =~ /true/i'
       when: never

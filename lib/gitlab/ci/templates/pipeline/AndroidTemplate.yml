@@ -274,8 +274,6 @@ combineCoverageReports:
   rules:
     - if: '$COMBINE_TEST_COVERAGE_DISABLED =~ /true/i'
       when: never
-    - if: '$VISUALIZE_TEST_COVERAGE_DISABLED =~ /true/i'
-      when: never
     # Don't rebuild when tags are committed
     - if: $CI_COMMIT_TAG
       when: never
@@ -284,7 +282,7 @@ combineCoverageReports:
     - if: $CI_PIPELINE_SOURCE == "web"
   allow_failure: true
 
-visualizeCombinedTestCoverage:
+visualizeTestCoverage:
   stage: report_processing
   image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
   script:
@@ -303,8 +301,6 @@ visualizeCombinedTestCoverage:
         coverage_format: cobertura
         path: "**/cobertura.xml"
   rules:
-    - if: '$COMBINE_TEST_COVERAGE_DISABLED =~ /true/i'
-      when: never
     - if: '$VISUALIZE_TEST_COVERAGE_DISABLED =~ /true/i'
       when: never
     # Don't rebuild when tags are committed

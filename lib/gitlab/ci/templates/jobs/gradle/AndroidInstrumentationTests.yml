@@ -32,6 +32,7 @@
       junit:
         - "**/TEST-*.xml"
     paths:
+      - "**/build/outputs/code_coverage/debugAndroidTest/connected"
       - "**/build/outputs/androidTest-results"
       - "**/build/reports/androidTests"
 

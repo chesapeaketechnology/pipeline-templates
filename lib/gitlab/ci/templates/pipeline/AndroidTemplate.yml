@@ -1,6 +1,6 @@
 include:
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/references/gradle/GradleWrapperSetup.yml
-  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/refs/heads/feature/instrumentation_test_artifacts_for_flavors/lib/gitlab/ci/templates/jobs/gradle/AndroidInstrumentationTests.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/AndroidInstrumentationTests.yml
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
 

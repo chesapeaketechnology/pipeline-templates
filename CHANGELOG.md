@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [4.x.x] - 2024-12-18
+### Changed
+- Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplate.yml
+- Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplateExt.yml
+
+
 ## [3.x.x] - on future date... somewhat unreleased but promises to have a new 4.x.x be created for any breaking change
 ### Added
 - Coverage Report Aggregator Plugin (CRAP) integration improvements for Jacoco Gitlab Pages creation

@@ -20,6 +20,9 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 - Breaking change of changing Android template's pipeline stages from assembleApk and deployApk to assemble and deploy since now handling apks and aars.
+- Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplate.yml
+- Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplateExt.yml
+
 
 ### Fixed
 - Harbor robot accounts with $ in usernames to work for Helm push.

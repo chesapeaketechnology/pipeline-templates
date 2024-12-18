@@ -27,7 +27,7 @@ variables:
   DEV_OR_RELEASE_OR_SUPPORT_REGEX: "$DEV_REGEX|$RELEASE_REGEX|$SUPPORT_REGEX"
 
   IMAGE_PREFIX: ""
-  DEFAULT_IMAGE: "jangrewe/gitlab-ci-android"
+  DEFAULT_IMAGE: "theimpulson/gitlab-ci-android"
 
   REPORTS_ARTIFACT: ${CI_PROJECT_DIR}/app/build/reports/tests/
 

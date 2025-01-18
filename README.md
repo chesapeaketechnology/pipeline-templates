@@ -44,6 +44,7 @@ branch match the below DEV_OR_RELEASE_REGEX variable.
 - [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 - [SAST](#sast-jobs)
 - [AsciiDoc](#asciidoc-job)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -90,6 +91,7 @@ they are posted to a Slack channel.
 - [Gradle Wrapper Configuration](#gradle-wrapper-configuration-job)
 - [Android Instrumentation Tests](#android-instrumentation-tests-job)
 - [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -144,6 +146,7 @@ merged into the "default" branch.
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Gradle Wrapper Configuration](#gradle-wrapper-configuration-job)
 - [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -264,6 +267,7 @@ from a project. Can be used for any cloud environment (e.g., Azure, AWS, etc).
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Gitlab SAST IaC](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -302,6 +306,7 @@ configuration that will lint and apply Docker continuous deployments (CD) from a
 - [SAST IaC](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST-IaC.gitlab-ci.yml)
 - [Trivy SBOM](#trivy-sbom-job)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -339,6 +344,7 @@ that will lint and apply Helm continuous deployments (CD) from a project.
 - [Publish Helm Chart Jobs](#publish-helm-chart-jobs)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
 - [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -368,6 +374,7 @@ machine host (e.g., Azure VMs, AWS VMs, local VMs, etc).
 - [Mega Linter](#mega-linter-job)
 - [Checkov IaC SAST](#checkov-iac-sast-job)
 - [Playbook Deploy](#playbook-deploy-job)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Reference URL
 
@@ -387,6 +394,7 @@ configuration that will lint and apply Bash continuous deployments (CD) from a p
 
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [Mega Linter](#mega-linter-job)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Reference URL
 
@@ -406,6 +414,7 @@ configuration that will lint and apply Python continuous deployments (CD) from a
 
 - [Secrets Detection](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/Secret-Detection.gitlab-ci.yml)
 - [SAST](https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Jobs/SAST.gitlab-ci.yml)
+- [Gitlab Release](#gitlab-release-job)
 
 #### Customization
 
@@ -986,6 +995,22 @@ Runs Trufflehog to detect secrets in a Gitlab repository.
 ```
 include:
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/TrufflehogSecretDetection.yml
+```
+
+### Gitlab Release (job)
+
+Creates a Gitlab Release that is viewable in a Gitlab repository's UI on the Release page that can include zipped source code, asset links, and more. See https://docs.gitlab.com/ee/user/project/releases/.
+
+#### Customization
+
+| Variables                 	              | Description                                                                          	                                                                                                                                                                                                                                                                                 |
+|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GITLAB_RELEASE_CLI_FLAGS 	               | The Gitlab Release CLI tool flags, see https://docs.gitlab.com/ee/user/project/releases/release_cli.html for details                          	                                                                                                                                                                                                                        |
+| GITLAB_RELEASE_CLI_FLAGS_EXTRA_DYNAMIC 	 | Extra dynamic flags variable, not typical immutable Gitlab variable, for the Gitlab Release CLI tool that can be used to dynamically set things like asset-links using a previous Gitlab job with artifacts -> reports -> dotenv: variables.env, see https://docs.gitlab.com/ee/user/project/releases/release_cicd_examples.html for example                         	 |
+
+```
+include:
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gitlab/GitlabRelease.yml
 ```
 
 ## Change log

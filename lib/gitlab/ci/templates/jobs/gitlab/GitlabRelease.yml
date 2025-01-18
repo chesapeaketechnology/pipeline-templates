@@ -1,0 +1,12 @@
+gitlab_release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  variables:
+    GITLAB_RELEASE_CLI_FLAGS: create --name "Release $CI_COMMIT_SHA" --description "Created using the gitlab release job" --tag-name "${CI_COMMIT_TAG}" --ref "$CI_COMMIT_SHA"
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created
+  script:
+    - echo "running release_job for $CI_COMMIT_TAG"
+    - echo "Using release flags of $GITLAB_RELEASE_CLI_FLAGS"
+    - echo "Using dynamic flags from dotenv variables.env of $GITLAB_RELEASE_CLI_FLAGS_EXTRA_DYNAMIC"
+    - release-cli $GITLAB_RELEASE_CLI_FLAGS $GITLAB_RELEASE_CLI_FLAGS_EXTRA_DYNAMIC

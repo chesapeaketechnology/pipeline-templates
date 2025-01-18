@@ -10,6 +10,7 @@ include:
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/lint/MegaLinter.yml
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/CheckovIacSast.yml
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/helm/PublishHelmChart.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gitlab/GitlabRelease.yml
 
 stages:
   - test
@@ -48,3 +49,7 @@ kics-iac-sast:
       sast: gl-sast-report.json
     paths:
       - gl-sast-report.json
+
+gitlab_release:
+  # Override deploy stage with publish since no deploy in this pipeline template
+  stage: publish

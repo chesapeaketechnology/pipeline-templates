@@ -3,8 +3,6 @@ semgrep-sast:
     reports:
       dependency_scanning:
         - gl-sast-report.json
-    paths:
-      - gl-sast-report.json
   rules:
     - if: '$SAST_DISABLED =~ /true/i'
       when: never

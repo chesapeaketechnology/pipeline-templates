@@ -1,6 +1,8 @@
 include:
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/references/gradle/GradleWrapperSetup.yml
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gradle/AndroidInstrumentationTests.yml
+  # TODO: Change back to release/3.x.x
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/feature/add-gitlab-release-job/lib/gitlab/ci/templates/jobs/gitlab/GitlabRelease.yml
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
 
@@ -177,8 +179,8 @@ assembleDebug:
   artifacts:
     expire_in: 1 week
     paths:
-      - $DEPLOY_DEBUG_APK_PATH
-      - $DEPLOY_DEBUG_AAR_PATH
+      # Speed up Gitlab jobs after this one by saving build artifacts
+      - "**/build/**"
 
 assembleRelease:
   stage: assemble
@@ -192,8 +194,8 @@ assembleRelease:
       -Pandroid.injected.signing.key.password=$KEY_PASSWORD
   artifacts:
     paths:
-      - $DEPLOY_RELEASE_APK_PATH
-      - $DEPLOY_RELEASE_AAR_PATH
+      # Speed up Gitlab jobs after this one by saving build artifacts
+      - "**/build/**"
 
 deployArtifactSnapshot:
   stage: deploy

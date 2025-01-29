@@ -8,9 +8,11 @@ default:
 include:
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gitlab/GitlabRelease.yml
 
 stages:
   - test
+  - deploy
 
 lint:
   image:  ${PYTHON_PIPELINE_IMAGE_PREFIX}$PYTHON_PIPELINE_DEFAULT_IMAGE

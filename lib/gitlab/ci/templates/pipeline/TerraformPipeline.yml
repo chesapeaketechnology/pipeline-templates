@@ -22,6 +22,7 @@ include:
   - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Security/SAST-IaC.gitlab-ci.yml
   - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/security/CheckovIacSast.yml
+  - remote: https://raw.githubusercontent.com/chesapeaketechnology/gitlab-templates/release/3.x.x/lib/gitlab/ci/templates/jobs/gitlab/GitlabRelease.yml
 
 cache:
   key: "${TF_ROOT}"
@@ -32,6 +33,7 @@ stages:
   - test
   - apply
   - destroy
+  - deploy
 
 fmt:
   stage: test

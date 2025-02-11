@@ -1,7 +1,7 @@
 semgrep-sast:
   artifacts:
     reports:
-      dependency_scanning:
+      sast:
         - gl-sast-report.json
     paths:
       - gl-sast-report.json

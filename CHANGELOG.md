@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file. This projec
 - Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplateExt.yml
 - Test coverage job from exit 0 to exit 1
 - Junit report path to be more generic in Android Instrumentation Test Job
-
+- Replaced semgrep-sast report name from dependency_scanning to sast
 
 ### Fixed
 - Harbor robot accounts with $ in usernames to work for Helm push.

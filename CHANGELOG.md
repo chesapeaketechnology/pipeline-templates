@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file. This projec
 - Breaking change of changing Android template's pipeline stages from assembleApk and deployApk to assemble and deploy since now handling apks and aars.
 - Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplate.yml
 - Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplateExt.yml
+- Removed artifacts paths: gl-sast-report.json
+- Replaced semgrep-sast report name from dependency_scanning to sast
 
 
 ### Fixed

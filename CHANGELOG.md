@@ -22,7 +22,6 @@ All notable changes to this project will be documented in this file. This projec
 - Replaced jangrewe/gitlab-ci-android with theimpulson/gitlab-ci-android image in AndroidTemplateExt.yml
 - Test coverage job from exit 0 to exit 1
 - Junit report path to be more generic in Android Instrumentation Test Job
-- Removed artifacts paths: gl-sast-report.json
 - Replaced semgrep-sast report name from dependency_scanning to sast
 
 ### Fixed

@@ -3,8 +3,10 @@ gemnasium-maven-dependency_scanning:
     reports:
       dependency_scanning:
         - gl-dependency-scanning-report.json
+      cyclonedx: "**/gl-sbom-*.cdx.json"
     paths:
       - gl-dependency-scanning-report.json
+      - "**/gl-sbom-*.cdx.json"
   rules:
     - if: '$MAVEN_DETECTION_DISABLED =~ /true/i'
       when: never

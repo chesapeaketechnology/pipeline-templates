@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file. This projec
 - Job to combine unit and instrumented tests to the Android GitLab template.
 - Job to visualize test reports created with the jacoco plugin.
 - Job to create a Gitlab Release and added this job to the all pipeline templates.
+- Artifact of "**/gl-sbom-*.cdx.json" so that the Gitlab generated CycloneDX is available for developers if needed.
 
 ### Changed
 - Breaking change of changing Android template's pipeline stages from assembleApk and deployApk to assemble and deploy since now handling apks and aars.
